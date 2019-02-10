@@ -1,0 +1,60 @@
+router 1
+--------
+
+en
+conf t
+
+int fa0/0
+ip add 10.10.1.1 255.255.255.0
+no shut
+exit
+int fa1/0
+ip add 192.168.1.1 255.255.255.0
+no shut
+exit
+
+ip route 192.168.2.0 255.255.255.0 10.10.1.2
+ip route 192.168.3.0 255.255.255.0 10.10.1.2
+exit
+
+router 2
+-------
+
+en
+conf t
+
+int fa0/0
+ip add 10.10.1.2 255.255.255.0
+no shut
+exit
+int fa1/0
+ip add 10.10.2.2 255.255.255.0
+no shut
+exit
+int fa2/0
+ip add 192.168.2.1 255.255.255.0
+no shut
+exit
+
+ip route 192.168.1.0 255.255.255.0 10.10.1.1
+ip route 192.168.3.0 255.255.255.0 10.10.2.1
+exit
+
+router 3
+---------
+
+en
+conf t
+
+int fa0/0
+ip add 10.10.2.1 255.255.255.0
+no shut
+exit
+int fa1/0
+ip add 192.168.3.1 255.255.255.0
+no shut
+exit
+
+ip route 192.168.2.0 255.255.255.0 10.10.2.2
+ip route 192.168.1.0 255.255.255.0 10.10.2.2
+exit

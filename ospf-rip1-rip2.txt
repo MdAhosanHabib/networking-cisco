@@ -1,0 +1,111 @@
+r1:
+en
+config t
+
+int Fa1/0
+ip add 192.168.4.1 255.255.255.0
+no shut
+exit
+
+int Fa0/0
+ip add 10.10.1.1 255.255.255.252
+no shut
+exit
+
+int Fa7/0
+ip add 10.10.4.1 255.255.255.252
+no shut
+exit
+
+route rip
+version 2
+network 10.10.4.0 
+network 10.10.1.0
+network 192.168.4.0
+no auto summary
+exit
+
+
+r2:
+
+en
+config t
+
+int Fa0/0
+ip add 192.168.3.1 255.255.255.192
+no shut
+exit
+
+int Fa1/0
+ip add 10.10.1.2 255.255.255.252
+no shut
+exit
+
+int Fa2/0
+ip add 10.10.3.1 255.255.255.252
+no shut
+exit
+
+route rip
+version 2
+network 10.10.3.0 
+network 10.10.1.0
+network 192.168.3.0
+no auto summary
+exit
+
+r3:
+
+en
+config t
+
+int Fa0/0
+ip add 192.168.5.1 255.255.255.240
+no shut
+exit
+
+int Fa6/0
+ip add 10.10.4.2 255.255.255.252
+no shut
+exit
+
+int Fa5/0
+ip add 10.10.2.1 255.255.255.252
+no shut
+exit
+
+route rip
+version 2
+network 10.10.2.0 
+network 10.10.4.0
+network 192.168.5.0
+no auto summary
+exit
+
+r4:
+
+en
+config t
+
+int Fa0/0
+ip add 192.168.2.1 255.255.255.224
+no shut
+exit
+
+int Fa3/0
+ip add 10.10.3.2 255.255.255.252
+no shut
+exit
+
+int Fa4/0
+ip add 10.10.2.2 255.255.255.252
+no shut
+exit
+
+route rip
+version 2
+network 10.10.2.0 
+network 10.10.3.0
+network 192.168.2.0
+no auto summary
+exit

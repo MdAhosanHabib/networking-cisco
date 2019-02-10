@@ -1,0 +1,56 @@
+router1:
+
+en
+conf t
+int fa0/0
+ip address 20.0.0.1 255.255.255.252
+no shut
+exit
+int fa1/0
+ip address 10.0.0.1 255.0.0.0
+no shut
+exit
+ip route 30.0.0.0 255.0.0.0 20.0.0.2
+
+ip nat inside source static 10.0.0.2 50.0.0.2
+int fa0/0
+ip nat outside
+int fa1/0
+ip nat inside
+exit
+
+router 2:
+
+en
+conf t
+int fa0/0
+ip address 20.0.0.2 255.255.255.252
+no shut
+exit
+int fa2/0
+ip address 30.0.0.1 255.0.0.0
+no shut
+exit
+ip route 10.0.0.0 255.0.0.0 20.0.0.1
+
+ip route 50.0.0.0 255.0.0.0 20.0.0.1
+exit
+
+
+
+/*
+router 1:
+en
+conf t
+ip nat inside source static 10.0.0.2 50.0.0.2
+int fa0/0
+ip nat outsoide
+int fa1/0
+ip nat inside
+exit
+
+router 2:
+en
+conf t
+ip route 50.0.0.0 255.0.0.0 20.0.0.1
+exit   */
